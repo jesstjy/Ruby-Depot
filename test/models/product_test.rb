@@ -72,5 +72,16 @@ test "product is not valid without a unique title - i18n" do
 	product.errors[:title]
 end
 
+test "product title must greater than 10" do 
+	product = Product.new(description:"yyy", price: 15, image_url: "zzz.jpg")
+
+	product.title = "book"
+	assert product.invalid?
+	assert_equal ["is too short (minimum is 10 characters)"], product.errors[:title]
+
+	product.title = "hamihamihami"
+	assert product.valid?
+
+end
 
 end
